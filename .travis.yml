@@ -12,7 +12,7 @@ addons:
   postgresql: "9.3"
 env:
   global:
-    - GITHUB_OAUTH_KEY=003a44d58f12089d0c0261338298af3813330949
+    - GITHUB_OAUTH_KEY=c07d06dce3bc791126033b0a1757b3e65e11fe0a
   matrix:
     - DB=sqlite3 NODE_ENV=testing
     - DB=mysql NODE_ENV=testing-mysql
