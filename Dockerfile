@@ -22,6 +22,8 @@ WORKDIR $GHOST_SOURCE
 
 ENV GHOST_VERSION 0.6.3
 
+COPY * \$GHOST_SOURCE/
+
 RUN buildDeps=' \
 		gcc \
 		make \
