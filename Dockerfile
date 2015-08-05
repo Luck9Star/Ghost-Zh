@@ -30,13 +30,8 @@ RUN buildDeps=' \
 	' \
 	&& set -x \
 	&& apt-get update && apt-get install -y $buildDeps --no-install-recommends && rm -rf /var/lib/apt/lists/* \
-	&& curl -sSL "https://github.com/Luck9Star/Ghost-Zh/archive/${GHOST_VERSION}.zip" -o ghost.zip \
-	&& unzip ghost.zip \
-	&& mv ./Ghost-Zh-${GHOST_VERSION}/* ./ \
 	&& npm install --production \
 	&& apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false $buildDeps \
-	&& rm ghost.zip \
-	&& rm -rf ./Ghost-Zh-${GHOST_VERSION}\
 	&& npm cache clean \
 	&& rm -rf /tmp/npm*
 
