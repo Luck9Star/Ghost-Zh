@@ -1,6 +1,7 @@
+// # Errors
 /*jslint regexp: true */
 var _                          = require('lodash'),
-    colors                     = require('colors'),
+    chalk                      = require('chalk'),
     path                       = require('path'),
     Promise                    = require('bluebird'),
     hbs                        = require('express-hbs'),
@@ -8,20 +9,19 @@ var _                          = require('lodash'),
     BadRequestError            = require('./bad-request-error'),
     InternalServerError        = require('./internal-server-error'),
     NoPermissionError          = require('./no-permission-error'),
+    MethodNotAllowedError      = require('./method-not-allowed-error'),
     RequestEntityTooLargeError = require('./request-too-large-error'),
     UnauthorizedError          = require('./unauthorized-error'),
     ValidationError            = require('./validation-error'),
     UnsupportedMediaTypeError  = require('./unsupported-media-type-error'),
     EmailError                 = require('./email-error'),
     DataImportError            = require('./data-import-error'),
+    TooManyRequestsError       = require('./too-many-requests-error'),
     config,
     errors,
 
     // Paths for views
     userErrorTemplateExists   = false;
-
-// This is not useful but required for jshint
-colors.setTheme({silly: 'rainbow'});
 
 // Shim right now to deal with circular dependencies.
 // @TODO(hswolff): remove circular dependency and lazy require.
@@ -63,9 +63,7 @@ errors = {
         if ((process.env.NODE_ENV === 'development' ||
             process.env.NODE_ENV === 'staging' ||
             process.env.NODE_ENV === 'production')) {
-            var msg = [component.cyan + ':'.cyan, info.cyan];
-
-            console.info.apply(console, msg);
+            console.info(chalk.cyan(component + ':', info));
         }
     },
 
@@ -74,14 +72,14 @@ errors = {
             process.env.NODE_ENV === 'staging' ||
             process.env.NODE_ENV === 'production')) {
             warn = warn || 'no message supplied';
-            var msgs = ['\nWarning:'.yellow, warn.yellow, '\n'];
+            var msgs = [chalk.yellow('\nWarning:', warn), '\n'];
 
             if (context) {
-                msgs.push(context.white, '\n');
+                msgs.push(chalk.white(context), '\n');
             }
 
             if (help) {
-                msgs.push(help.green);
+                msgs.push(chalk.green(help));
             }
 
             // add a new line
@@ -126,14 +124,14 @@ errors = {
         if ((process.env.NODE_ENV === 'development' ||
             process.env.NODE_ENV === 'staging' ||
             process.env.NODE_ENV === 'production')) {
-            msgs = ['\nERROR:'.red, err.red, '\n'];
+            msgs = [chalk.red('\nERROR:', err), '\n'];
 
             if (context) {
-                msgs.push(context.white, '\n');
+                msgs.push(chalk.white(context), '\n');
             }
 
             if (help) {
-                msgs.push(help.green);
+                msgs.push(chalk.green(help));
             }
 
             // add a new line
@@ -176,6 +174,37 @@ errors = {
                 res.redirect(redirectTo);
             }
         };
+    },
+
+    /**
+     * ### Format HTTP Errors
+     * Converts the error response from the API into a format which can be returned over HTTP
+     *
+     * @private
+     * @param {Array} error
+     * @return {{errors: Array, statusCode: number}}
+     */
+    formatHttpErrors: function formatHttpErrors(error) {
+        var statusCode = 500,
+            errors = [];
+
+        if (!_.isArray(error)) {
+            error = [].concat(error);
+        }
+
+        _.each(error, function each(errorItem) {
+            var errorContent = {};
+
+            // TODO: add logic to set the correct status code
+            statusCode = errorItem.code || 500;
+
+            errorContent.message = _.isString(errorItem) ? errorItem :
+                (_.isObject(errorItem) ? errorItem.message : 'Unknown API Error');
+            errorContent.errorType = errorItem.errorType || 'InternalServerError';
+            errors.push(errorContent);
+        });
+
+        return {errors: errors, statusCode: statusCode};
     },
 
     handleAPIError: function (error, permsMessage) {
@@ -284,7 +313,7 @@ errors = {
     },
 
     error404: function (req, res, next) {
-        var message = res.isAdmin && req.user ? 'No Ghost Found' : '页面未找到';
+        var message = '页面未找到';
 
         // do not cache 404 error
         res.set({'Cache-Control': 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0'});
@@ -345,6 +374,7 @@ _.each([
     'logErrorAndExit',
     'logErrorWithRedirect',
     'handleAPIError',
+    'formatHttpErrors',
     'renderErrorPage',
     'error404',
     'error500'
@@ -363,3 +393,5 @@ module.exports.RequestEntityTooLargeError = RequestEntityTooLargeError;
 module.exports.UnsupportedMediaTypeError  = UnsupportedMediaTypeError;
 module.exports.EmailError                 = EmailError;
 module.exports.DataImportError            = DataImportError;
+module.exports.MethodNotAllowedError      = MethodNotAllowedError;
+module.exports.TooManyRequestsError       = TooManyRequestsError;

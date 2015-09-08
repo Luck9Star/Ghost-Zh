@@ -185,7 +185,7 @@ html {
 body {
     height: 100%;
     max-height: 100%;
-    font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Helvetica Neue","Helvetica","Lucida Grande","Arial","Hiragino Sans GB","Microsoft Yahei","WenQuanYi Micro Hei","sans-serif";
     letter-spacing: 0.01rem;
     font-size: 1.8rem;
     line-height: 1.75em;
@@ -212,7 +212,6 @@ h4, h5, h6 {
     color: #2E2E2E;
     line-height: 1.15em;
     margin: 0 0 0.4em 0;
-    font-family:"Helvetica Neue", Helvetica, Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei UI","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
     text-rendering: geometricPrecision;
 }
 
@@ -278,7 +277,7 @@ dl dt {
     text-align: right;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-weight: 700;
+    font-weight: normal;
     margin-bottom: 1em;
 }
 
@@ -523,7 +522,7 @@ body.nav-opened .site-wrapper {
 
 .main-nav a {
     text-decoration: none;
-    font-family: 'Open Sans', sans-serif;
+    font-family: inherit;
 }
 
 /* Navigation */
@@ -576,7 +575,7 @@ body.nav-opened .nav {
     top: 45px;
     left: 30px;
     font-size: 16px;
-    font-weight: 100;
+    font-weight: normal;
     text-transform: uppercase;
     color: #fff;
 }
@@ -698,7 +697,7 @@ body.nav-opened .nav {
     color: #111 !important; /* Overides `.nav a:link, .nav a:visited` colour */
     text-align: center;
     font-size: 12px;
-    font-family: "Open Sans", sans-serif;
+    font-family: inherit;
     text-transform: uppercase;
     text-decoration: none;
     line-height: 35px;
@@ -802,7 +801,7 @@ body.nav-opened .nav {
 }
 .menu-button:before {
     font-size: 12px;
-    font-weight: bold;
+    font-weight: normal;
     margin-right: 6px;
     position: relative;
     top: 1px;
@@ -870,7 +869,7 @@ body.nav-opened .nav {
     font-size: 5rem;
     letter-spacing: -1px;
     font-weight: 700;
-    font-family: "Open Sans", sans-serif;
+    font-family: inherit;
     color: #fff;
 }
 
@@ -960,7 +959,7 @@ body:not(.post-template) .post-title {
 .post-meta {
     display: block;
     margin: 1.75rem 0 0 0;
-    font-family: "Open Sans", sans-serif;
+    font-family: inherit;
     font-size: 1.5rem;
     line-height: 2.2rem;
     color: #9EABB3;
@@ -1297,7 +1296,7 @@ body:not(.post-template) .post-title {
 .author-bio {
     font-size: 1.8rem;
     line-height: 1.5em;
-    font-weight: 200;
+    font-weight: normal;
     color: #50585D;
     letter-spacing: 0;
     text-indent: 0;
@@ -1394,7 +1393,7 @@ body:not(.post-template) .post-title {
     padding: 4px 10px 5px;
     text-transform: uppercase;
     font-size: 1.1rem;
-    font-family: "Open Sans", sans-serif;
+    font-family: inherit;
     color: rgba(255,255,255,0.8);
     border: rgba(255,255,255,0.5) 1px solid;
     border-radius: 4px;
@@ -1439,6 +1438,9 @@ body:not(.post-template) .post-title {
 /* if there are two posts without covers, put a border between them */
 .read-next-story.no-cover + .read-next-story.no-cover {
     border-left: rgba(0,0,100,0.04) 1px solid;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 /* Correctly position site-footer when next to the .read-next container */
@@ -1482,7 +1484,7 @@ body:not(.post-template) .post-title {
     width: 80%;
     max-width: 710px;
     margin: 4rem auto;
-    font-family: "Open Sans", sans-serif;
+    font-family: inherit;
     font-size: 1.3rem;
     color: #9EABB3;
     text-align: center;
@@ -1566,7 +1568,7 @@ body:not(.post-template) .post-title {
     position: relative;
     margin: 8rem 0 0 0;
     padding: 1rem 15px;
-    font-family: "Open Sans", sans-serif;
+    font-family: inherit;
     font-size: 1rem;
     line-height: 1.75em;
     color: #BBC7CC;

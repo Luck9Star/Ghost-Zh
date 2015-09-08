@@ -1,8 +1,10 @@
+// # Mail
+// Handles sending email for Ghost
 var _          = require('lodash'),
     Promise    = require('bluebird'),
     nodemailer = require('nodemailer'),
     validator  = require('validator'),
-    config     = require('./config');
+    config     = require('../config');
 
 function GhostMailer(opts) {
     opts = opts || {};
@@ -66,10 +68,10 @@ GhostMailer.prototype.send = function (message) {
     to = message.to || false;
 
     if (!this.transport) {
-        return Promise.reject(new Error('Email Error: No e-mail transport configured.'));
+        return Promise.reject(new Error('Email Error: 未正确设置邮件传输代理'));
     }
     if (!(message && message.subject && message.html && message.to)) {
-        return Promise.reject(new Error('Email Error: Incomplete message data.'));
+        return Promise.reject(new Error('Email Error: 邮件格式错误。'));
     }
     sendMail = Promise.promisify(self.transport.sendMail.bind(self.transport));
 
@@ -91,7 +93,7 @@ GhostMailer.prototype.send = function (message) {
             }
 
             response.statusHandler.once('failed', function (data) {
-                var reason = 'Email Error: Failed sending email';
+                var reason = 'Email Error: 邮件发送失败';
 
                 if (data.error && data.error.errno === 'ENOTFOUND') {
                     reason += ': there is no mail server at this address: ' + data.domain;
@@ -101,7 +103,7 @@ GhostMailer.prototype.send = function (message) {
             });
 
             response.statusHandler.once('requeue', function (data) {
-                var errorMessage = 'Email Error: message was not sent, requeued. Probably will not be sent. :(';
+                var errorMessage = 'Email Error: 邮件未成功发送，已排入队列。可能将不被发送。 :(';
 
                 if (data.error && data.error.message) {
                     errorMessage += '\nMore info: ' + data.error.message;
@@ -111,7 +113,7 @@ GhostMailer.prototype.send = function (message) {
             });
 
             response.statusHandler.once('sent', function () {
-                return resolve('Message was accepted by the mail server. Make sure to check inbox and spam folders. :)');
+                return resolve('邮件已发送到邮件服务器。请检查收件箱或垃圾箱。 :)');
             });
         });
     });

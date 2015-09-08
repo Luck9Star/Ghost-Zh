@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/html4/loose.dtd">
 
-<html lang="en">
+<html lang="zh-cn">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <style>
@@ -28,7 +28,7 @@
             font-family: sans-serif;
             font-size: 15px;
             line-height: 1.5;
-            color:#828282;
+            color:#808284;
             background:#ffffff;
             -webkit-font-smoothing: antialiased;
             -webkit-text-size-adjust:none;
@@ -57,7 +57,7 @@
         p {
             margin: 0;
             padding: 0 0 1.5em 0;
-            color:#828282;
+            color:#808284;
             font-size: 15px;
             line-height: 1.5em;
             font-family: sans-serif;
@@ -66,7 +66,7 @@
         ul, ol {
             margin: 0;
             padding: 0 0 1.5em 2em;
-            color:#828282;
+            color:#808284;
             font-size: 15px;
             line-height: 1.5em;
             font-family: sans-serif;
@@ -93,17 +93,22 @@
                                     <td class="content-cell" width="100%">
 
                                         <!-- START OF EMAIL CONTENT -->
-                                        <p><strong>Hello!</strong></p>
-                                        <p>祝贺！你的 Ghost 博客已经成功创建了：{{ siteUrl }} </p>
-                                        <p>现在就可以登录进来与 Ghost 亲密接触了，登录账号和密码如下：</p>
-                                        <p> 邮箱地址：  {{ownerEmail}} <br>
-                                            密码： 是注册时你所输入的密码</p>
-                                        <p>请将此邮件妥善保管。</p>
-                                        <p>xoxo</p>
+                                        <h1>欢迎加入 Ghost</h1>
+                                        <p><strong>{{blogName}}</strong> 是基于 Ghost 搭建的博客！ {{invitedByName}} 邀请你加入共同创作。请通过下面的链接，激活你的测试账号。</p>
+                                        <p><a href="{{resetLink}}">点击这里激活的你的测试账号</a></p>
+                                        <p><strong>不了解Ghost博客? </strong> Ghost博客是一个纯粹的内容写作和发布平台。简单易用的写作编辑器，让你可以沉浸在内容创作中，享受写作的乐趣。<a href="http://www.ghostchina.com">了解更多</a>。</p>
+                                        <p>如果你对 {{blogName}} 博客上的账号有疑问, 可以向 {{invitedByName}}（{{invitedByEmail}}）咨询。</p>
+                                        <p>与 {{invitedByName}} 一起享受创作的乐趣吧！</p>
                                         <br><br>
-                                        <p>Ghost中国：<a href="http://www.ghostchina.com">http://www.ghostchina.com</a></p>
-                                        <p>Ghost论坛：<a href="http://wenda.ghostchina.com">http://wenda.ghostchina.com</a></p>
-                                        <p>官方微博：<a href="http://weibo.com/ghostchinacom">http://weibo.com/ghostchinacom</a></p>
+                                        <p>Ghost<br>
+                                        <a href="https://ghost.org">https://ghost.org</a></p>
+                                        <br><br>
+                                        <p>Ghost 中国：<br>
+                                        <a href="http://www.ghostchina.com">http://www.ghostchina.com</a></p>
+                                        <p>Ghost 中国问答社区：<br>
+                                        <a href="http://wenda.ghostchina.com">http://wenda.ghostchina.com</a></p>
+                                        <p>Ghost 中国官方微博：<br>
+                                        <a href="http://weibo.com/ghostchinacom">http://weibo.com/ghostchinacom</a></p>
                                         <!-- END OF EMAIL CONTENT -->
 
                                     </td>
@@ -114,7 +119,7 @@
                             <table class="footer" width="100%" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
                                     <td class="footer-cell" align="right">
-                                        此邮件由 <a href="{{siteUrl}}">{{siteUrl}}</a> 发出。
+                                        Sent by <a href="{{siteUrl}}">{{siteUrl}}</a>
                                     </td>
                                 </tr>
                             </table>

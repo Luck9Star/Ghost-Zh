@@ -1,3 +1,6 @@
+// # Bootup
+// This file needs serious love & refactoring
+
 // Module dependencies
 var express     = require('express'),
     hbs         = require('express-hbs'),
@@ -6,6 +9,7 @@ var express     = require('express'),
     uuid        = require('node-uuid'),
     _           = require('lodash'),
     Promise     = require('bluebird'),
+    i18n        = require('./i18n'),
 
     api         = require('./api'),
     config      = require('./config'),
@@ -21,26 +25,7 @@ var express     = require('express'),
     xmlrpc      = require('./data/xml/xmlrpc'),
     GhostServer = require('./ghost-server'),
 
-// Variables
     dbHash;
-
-function doFirstRun() {
-    var firstRunMessage = [
-        '欢迎使用 Ghost 博客系统。',
-        '当前博客的运行环境为 <strong>',
-        process.env.NODE_ENV,
-        '</strong>。',
-
-        '博客网址被设置为',
-        '<strong>' + config.url + '</strong>.',
-        '详情请参考 <a href="http://www.ghostchina.com/" target="_blank">Ghost中文文档</a>。'
-    ];
-
-    return api.notifications.add({notifications: [{
-        type: 'info',
-        message: firstRunMessage.join(' ')
-    }]}, {context: {internal: true}});
-}
 
 function initDbHashAndFirstRun() {
     return api.settings.read({key: 'dbHash', context: {internal: true}}).then(function (response) {
@@ -55,7 +40,8 @@ function initDbHashAndFirstRun() {
                 .then(function (response) {
                     dbHash = response.settings[0].value;
                     return dbHash;
-                }).then(doFirstRun);
+                    // Use `then` here to do 'first run' actions
+                });
         }
 
         return dbHash;
@@ -133,9 +119,8 @@ function initNotifications() {
     }
 }
 
-// ## Initializes the ghost application.
-// Sets up the express server instance.
-// Instantiates the ghost singleton, helpers, routes, middleware, and apps.
+// ## Initialise Ghost
+// Sets up the express server instances, runs init on a bunch of stuff, configures views, helpers, routes and more
 // Finally it returns an instance of GhostServer
 function init(options) {
     // Get reference to an express app instance.
@@ -184,6 +169,9 @@ function init(options) {
         );
     }).then(function () {
         var adminHbs = hbs.create();
+
+        // Initialize Internationalization
+        i18n.init();
 
         // Output necessary notifications on init
         initNotifications();

@@ -3,6 +3,7 @@
 此份中文文档列出了 Ghost 以及 Ghost 中文版中可能影响到你的隐私的组件。请注意，此文档将不会涉及也有可能影响到你的隐私的第三方主题或 App 。
 
 本文档中列出的每项服务都可以通过修改 Ghost 的 `config.js` 配置文件来禁用。请查看 [配置指南](http://support.ghost.org/config/) 了解详情。
+
 ## 官方服务
 
 Ghost 官方提供的某些服务是默认开启的。这些服务需要连接到 Ghost.org 并且由 Ghost 基金会（Ghost Foundation -- 实际运作 Ghost 项目的非盈利组织）管控。
@@ -28,6 +29,8 @@ Ghost 使用了一些第三方服务来提供某些特定功能。
 
 Ghost 使用了 Open Sans [Google Font](https://www.google.com/fonts) 字体，并在 Ghost 后台页面中加载此字体用于更好的排版。
 
+由于 Google Font 总是被墙，所以并且这些英文字体对于中文来说没有丝毫用处，因此在 Ghost 中文版中我们将这些字体删除了。
+
 ### Gravatar
 
 为了自动为新用户设置头像图片，Ghost 向 [Gravatar](http://gravatar.com) 查询是否用户的邮箱地址有关联的头像可用。如果有，我们就用 Gravatar 上的头像图片，如果没有，就设置为默认图片。
@@ -41,14 +44,13 @@ Ghost 使用了 Open Sans [Google Font](https://www.google.com/fonts) 字体，�
 
 RPC ping 只在 Ghost 运行在 `production` 环境时才会开启。
 
-### 分享按钮
-
-Ghost 自带的默认主题包含了三个分享按钮，分别是：[Twitter](http://twitter.com)、[Facebook](http://facebook.com) 和 [Google Plus](http://plus.google.com)。没有从这三个网站加载任何资源，然而，这些分享按钮能够帮助你的访客向这三个网站分享你所发布的内容。
-
-### 结构化数据
 
 Ghost 会输出一些基本的元数据标签以便被流行的社交网络识别博客上的内容。目前 `{{ghost_head}}` 助手函数所输出的元数据符合以下三个数据协议标准：
 
 - Schema.org - http://schema.org/docs/documents.html
 - Open Graph - http://ogp.me/
 - Twitter cards - https://dev.twitter.com/cards/overview
+
+### 默认主题
+
+Ghost 自带的默认主题引入了 jQuery 文件，此文件位于 [BootCDN](http://www.bootcdn.cn/jquery/) 上。默认主题还包含了三个分享按钮，分别是：[Twitter](http://twitter.com)、[Facebook](http://facebook.com) 和 [Google Plus](http://plus.google.com)，没有引入任何额外资源。

@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/html4/loose.dtd">
 
-<html lang="zh-cn">
+<html lang="zh-CN">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <style>
@@ -28,7 +28,7 @@
             font-family: sans-serif;
             font-size: 15px;
             line-height: 1.5;
-            color:#828282;
+            color:#808284;
             background:#ffffff;
             -webkit-font-smoothing: antialiased;
             -webkit-text-size-adjust:none;
@@ -57,7 +57,7 @@
         p {
             margin: 0;
             padding: 0 0 1.5em 0;
-            color:#828282;
+            color:#808284;
             font-size: 15px;
             line-height: 1.5em;
             font-family: sans-serif;
@@ -66,7 +66,7 @@
         ul, ol {
             margin: 0;
             padding: 0 0 1.5em 2em;
-            color:#828282;
+            color:#808284;
             font-size: 15px;
             line-height: 1.5em;
             font-family: sans-serif;
@@ -93,13 +93,20 @@
                                     <td class="content-cell" width="100%">
 
                                         <!-- START OF EMAIL CONTENT -->
-                                        <p><strong>Hello!</strong></p>
-                                        <p>你在 <a href="{{ siteUrl }}">{{ siteUrl }}</a> 网站提交了重置密码的申请。</p>
-                                        <p>请点击下面的链接重置密码吧：<br><br>  <a href="{{ resetUrl }}">点击这里重置密码</a></p>
+                                        <p><strong>你好！</strong></p>
+                                        <p>恭喜，
+                                        你的 Ghost博客 {{ siteUrl }} 已经正确设置了邮件代理。</p>
+                                        <p>你能收到这封邮件说明邮件发送完全正常，请尽情地去码字吧！</p>
+                                        <p>xoxo</p>
+                                        <p>Ghost<br>
+                                        <a href="https://ghost.org">https://ghost.org</a></p>
                                         <br><br>
-                                        <p>Ghost中国：<a href="http://www.ghostchina.com">http://www.ghostchina.com</a></p>
-                                        <p>Ghost论坛：<a href="http://wenda.ghostchina.com">http://wenda.ghostchina.com</a></p>
-                                        <p>官方微博：<a href="http://weibo.com/ghostchinacom">http://weibo.com/ghostchinacom</a></p>
+                                        <p>Ghost 中国：<br>
+                                        <a href="http://www.ghostchina.com">http://www.ghostchina.com</a></p>
+                                        <p>Ghost 中国问答社区：<br>
+                                        <a href="http://wenda.ghostchina.com">http://wenda.ghostchina.com</a></p>
+                                        <p>Ghost 中国官方微博：<br>
+                                        <a href="http://weibo.com/ghostchinacom">http://weibo.com/ghostchinacom</a></p>
                                         <!-- END OF EMAIL CONTENT -->
 
                                     </td>
@@ -110,7 +117,7 @@
                             <table class="footer" width="100%" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
                                     <td class="footer-cell" align="right">
-                                        Sent by <a href="{{siteUrl}}">{{siteUrl}}</a>
+                                        此邮件由 <a href="{{siteUrl}}">{{siteUrl}}</a> 发送。
                                     </td>
                                 </tr>
                             </table>
