@@ -5235,8 +5235,6 @@ define('ghost/controllers/team/user', ['exports', 'ember', 'ghost/models/slug-ge
 
     'use strict';
 
-    moment.locale("zh-cn");
-
     exports['default'] = Ember['default'].Controller.extend(ValidationEngine['default'], {
         // ValidationEngine settings
         validationType: 'user',
@@ -29292,6 +29290,9 @@ define('ghost/transforms/moment-date', ['exports', 'ember-data'], function (expo
 
     'use strict';
 
+    moment.locale("zh-cn");
+
+    /* global moment */
     var MomentDate = DS['default'].Transform.extend({
         deserialize: function deserialize(serialized) {
             if (serialized) {
