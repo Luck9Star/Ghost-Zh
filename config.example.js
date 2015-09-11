@@ -38,7 +38,9 @@ config = {
             host: '127.0.0.1',
             port: '2368'
         },
-
+        paths: {
+            contentPath: path.join(process.env.GHOST_CONTENT, '/')
+        },
         //Storage.Now,we can support `qiniu`,`upyun`, `aliyun oss`, `aliyun ace-storage` and `local-file-store`
         storage: {
             provider: 'local-file-store'
