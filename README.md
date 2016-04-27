@@ -1,4 +1,5 @@
 <a href="https://github.com/TryGhost/Ghost"><img src="https://cloud.githubusercontent.com/assets/120485/6622822/c4c639fe-c8e7-11e4-9e64-5bec06c8b4c3.png" alt="Ghost" /></a>
+<a href="https://travis-ci.org/TryGhost/Ghost"><img align="right" src="https://travis-ci.org/TryGhost/Ghost.svg?branch=master" alt="Build status" /></a>
 
 ![Ghost Screenshot](https://cloud.githubusercontent.com/assets/120485/6626466/6dae46b2-c8ff-11e4-8c7c-8dd63b215f7b.jpg)
 
@@ -14,14 +15,14 @@ Ghost 目由非盈利性组织 **Ghost Foundation** 和一群优秀的独立[贡
 - [心愿列表](http://ideas.ghost.org/)
 - [技术博客](http://dev.ghost.org)
 
-**NOTE: If you’re stuck, can’t get something working or need some help, please head on over and join our [Slack community](https://ghost.org/slack/) rather than opening an issue.**
+**注意：如果你在使用 Ghost 过程中遇到难题需要帮助，请尽量加入 [Slack 社区](https://ghost.org/slack/) 寻求帮助而不是在 Github 上新开一个 issue。**
 
 
 # 快速安装
 
 安装前请确保已经安装了 Node.js - 我们建议使用 **Node v0.10.x** 的最新版本。
 
-Ghost 同时还支持 **Node v0.12** 和 **io.js v1.2**，但是这些版本可能会导致安装失败，请自行斟酌。获取帮助请到 [论坛](https://ghost.org/forum/installation/)。
+Ghost 同时也支持 **Node v0.12** 和 **io.js v1.2** ，但是请注意，这些版本很有可能导致安装失败。如果遇到问题，请到[论坛](https://ghost.org/forum/installation/)寻求帮助。
 
 1. 下载 [最新版本](https://ghost.org/download/) 的 Ghost
 1. 解压文件至你所希望的安装位置
@@ -32,7 +33,7 @@ Ghost 同时还支持 **Node v0.12** 和 **io.js v1.2**，但是这些版本可�
     - 生产环境：`npm start --production`
 1. 启动浏览器，打开 `http://localhost:2368/ghost` 链接
 
-还可以参考详细的 [安装指南](http://support.ghost.org/installation/) 。
+还可以参考详细的[安装指南](http://support.ghost.org/installation/) 。
 
 # 安装中文版
 
@@ -53,13 +54,13 @@ Node.js 是必须的，同样也是建议使用  **Node v0.10.x** 的最新版�
 安装 Node.js。
 
 ```bash
-# Node v0.10.x - 完全支持
-# Node v0.12.x and io.js v1.2 - 部分支持
+# Node v0.10.x - 推荐
+# Node v0.12.x 与 io.js v1.2 - 部分支持
 #
 # 自行斟酌吧
 ```
 
-克隆 ghost:
+克隆 :ghost:
 
 ```bash
 git clone git://github.com/tryghost/ghost.git
@@ -100,12 +101,10 @@ npm start
 
 祝贺你，一切搞定了！顺便说一下，你还可以直接执行 `npm install ghost` 指令将 Ghost 作为 npm 包来使用。[将 Ghost 作为 NPM 模块来使用](https://github.com/TryGhost/Ghost/wiki/Using-Ghost-as-an-npm-module) 是一份很详尽的文档。
 
-还可以参考更详细的 [安装指南](http://support.ghost.org/installation/) 。
+还可以参考更详细的[安装指南](http://support.ghost.org/installation/) 。
 
 
 # 部署 Ghost
-
-最简单的 Ghost 部署方案就是购买官方的 <strong><a href="https://ghost.org/pricing/">Ghost(Pro)</a></strong> 服务（托管在国外）。此服务所获得的收益都将用于支持 Ghost Foundation，这也是我们能够一直维护此项目的财政来源。
 
 ![Ghost(Pro) + DigitalOcean](https://cloud.githubusercontent.com/assets/120485/8180331/d6674e32-1414-11e5-8ce4-2250e9994906.png)
 
@@ -122,7 +121,7 @@ Ghost 官方支持的 **[Ghost(Pro)](https://ghost.org/pricing/)** 服务能够�
 
 当 Ghost 有新版本发布时，请参考 [升级指南](http://support.ghost.org/how-to-upgrade/) 以了解如何升级 Ghost。
 
-你可以在 [我们的论坛（英文）](https://ghost.org/forum) & [问答社区（中文）](http://wenda.ghostchina.com/) 和其他 Ghost 用户交流，或者在 [public Slack team](https://ghost.org/slack/) 与 Ghost 开发者沟通。我们每周二下午 5:30 都会在 Slack 上开碰头会。请注意，我们说的是`伦敦时间`。
+你可以加入 [问答社区（中文）](http://wenda.ghostchina.com/) 和其他 Ghost 用户交流，或者在 [public Slack team](https://ghost.org/slack/) 与 Ghost 开发者沟通。我们每周二下午 5:30 都会在 Slack 上开碰头会。请注意，我们说的是`伦敦时间`。
 
 每次有新版本都会在 [技术博客](http://dev.ghost.org/tag/releases/) 上公布。你可以通过邮件订阅或者在 Twitter 上关注 [@TryGhost_Dev](https://twitter.com/tryghost_dev)。
 
@@ -132,3 +131,7 @@ Ghost 官方支持的 **[Ghost(Pro)](https://ghost.org/pricing/)** 服务能够�
 # 版权 & 协议
 
 Copyright (c) 2013-2015 Ghost Foundation - Released under the [MIT license](LICENSE).
+
+# 中文版本及插件
+
+Copyright (c) 2013-2015 Ghost 中国/中文网 - 采用 `MIT 许可协议` 发布。

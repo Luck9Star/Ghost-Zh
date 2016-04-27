@@ -39,9 +39,8 @@ var _              = require('lodash'),
     }()),
 
     fullGlob = (function () {
-        var packagejson = JSON.parse(fs.readFileSync('package.json', {encoding: 'utf8'}));
+        var packagejson = JSON.parse(fs.readFileSync('npm-shrinkwrap.json', {encoding: 'utf8'}));
         var pkgs = _.keys(packagejson.dependencies);
-        pkgs = pkgs.concat(_.keys(packagejson.optionalDependencies));
         
         return pkgs.map(function (package) {
             return 'node_modules/' + package + '/**';
@@ -140,7 +139,6 @@ var _              = require('lodash'),
                     '!config*.js', // note: i added this, do we want this linted?
                     'core/*.js',
                     'core/server/**/*.js',
-                    'core/shared/**/*.js',
                     'core/test/**/*.js',
                     '!core/test/coverage/**',
                     '!core/shared/vendor/**/*.js'
@@ -154,8 +152,7 @@ var _              = require('lodash'),
 
                 client: {
                     options: {
-                        esnext: true,
-                        disallowObjectController: true
+                        config: 'core/client/.jscsrc'
                     },
 
                     files: {
@@ -163,9 +160,22 @@ var _              = require('lodash'),
                             'core/client/**/*.js',
                             '!core/client/node_modules/**/*.js',
                             '!core/client/bower_components/**/*.js',
+                            '!core/client/tests/**/*.js',
                             '!core/client/tmp/**/*.js',
                             '!core/client/dist/**/*.js',
                             '!core/client/vendor/**/*.js'
+                        ]
+                    }
+                },
+
+                client_tests: {
+                    options: {
+                        config: 'core/client/tests/.jscsrc'
+                    },
+
+                    files: {
+                        src: [
+                            'core/client/tests/**/*.js'
                         ]
                     }
                 },
@@ -177,7 +187,6 @@ var _              = require('lodash'),
                             '!config*.js', // note: i added this, do we want this linted?
                             'core/*.js',
                             'core/server/**/*.js',
-                            'core/shared/**/*.js',
                             'core/test/**/*.js',
                             '!core/test/coverage/**',
                             '!core/shared/vendor/**/*.js'
@@ -239,8 +248,8 @@ var _              = require('lodash'),
                 // #### All Integration tests
                 integration: {
                     src: [
-                        'core/test/integration/**/model*_spec.js',
-                        'core/test/integration/**/api*_spec.js',
+                        'core/test/integration/**/*_spec.js',
+                        'core/test/integration/**/*_spec.js',
                         'core/test/integration/*_spec.js'
                     ]
                 },
@@ -359,17 +368,22 @@ var _              = require('lodash'),
 
                 'sqlite-bindings': {
                     command: [
-                        'node_modules/.bin/node-pre-gyp.cmd install --runtime=node --target_arch=x64 --target_platform=linux --target=0.10.38',
-                        'node_modules/.bin/node-pre-gyp.cmd install --runtime=node --target_arch=ia32 --target_platform=linux --target=0.10.38',
-                        'node_modules/.bin/node-pre-gyp.cmd install --runtime=node --target_arch=x64 --target_platform=win32 --target=0.10.38',
-                        'node_modules/.bin/node-pre-gyp.cmd install --runtime=node --target_arch=ia32 --target_platform=win32 --target=0.10.38',
-                        'node_modules/.bin/node-pre-gyp.cmd install --runtime=node --target_arch=x64 --target_platform=darwin --target=0.10.38',
+                        'node_modules/.bin/node-pre-gyp.cmd install --runtime=node --target_arch=x64 --target_platform=linux --target=0.10.4',
+                        'node_modules/.bin/node-pre-gyp.cmd install --runtime=node --target_arch=x64 --target_platform=win32 --target=0.10.4',
+                        'node_modules/.bin/node-pre-gyp.cmd install --runtime=node --target_arch=ia32 --target_platform=win32 --target=0.10.4',
+                        'node_modules/.bin/node-pre-gyp.cmd install --runtime=node --target_arch=x64 --target_platform=darwin --target=0.10.4',
 
-                        'node_modules/.bin/node-pre-gyp.cmd install --runtime=node --target_arch=x64 --target_platform=linux',
-                        'node_modules/.bin/node-pre-gyp.cmd install --runtime=node --target_arch=ia32 --target_platform=linux',
-                        'node_modules/.bin/node-pre-gyp.cmd install --runtime=node --target_arch=x64 --target_platform=win32',
-                        'node_modules/.bin/node-pre-gyp.cmd install --runtime=node --target_arch=ia32 --target_platform=win32',
-                        'node_modules/.bin/node-pre-gyp.cmd install --runtime=node --target_arch=x64 --target_platform=darwin'
+
+                        'node_modules/.bin/node-pre-gyp.cmd install --runtime=node --target_arch=x64 --target_platform=linux --target=0.12.0',
+                        'node_modules/.bin/node-pre-gyp.cmd install --runtime=node --target_arch=x64 --target_platform=win32 --target=0.12.0',
+                        'node_modules/.bin/node-pre-gyp.cmd install --runtime=node --target_arch=ia32 --target_platform=win32 --target=0.12.0',
+                        'node_modules/.bin/node-pre-gyp.cmd install --runtime=node --target_arch=x64 --target_platform=darwin --target=0.12.0',
+
+
+                        'node_modules/.bin/node-pre-gyp.cmd install --runtime=node --target_arch=x64 --target_platform=linux --target=4.2.0',
+                        'node_modules/.bin/node-pre-gyp.cmd install --runtime=node --target_arch=x64 --target_platform=win32 --target=4.2.0',
+                        'node_modules/.bin/node-pre-gyp.cmd install --runtime=node --target_arch=ia32 --target_platform=win32 --target=4.2.0',
+                        'node_modules/.bin/node-pre-gyp.cmd install --runtime=node --target_arch=x64 --target_platform=darwin --target=4.2.0'
                         ].join('&&').replace(/\//g, '\\'),
                     options: {
                         stdout: true,
@@ -383,6 +397,10 @@ var _              = require('lodash'),
 
                 shrinkwrap: {
                     command: 'npm shrinkwrap'
+                },
+
+                dedupe: {
+                    command: 'npm dedupe'
                 },
 
                 csscombfix: {
@@ -479,6 +497,17 @@ var _              = require('lodash'),
                 default: {
                     options: {
                         params: '--init'
+                    }
+                }
+            },
+
+            uglify: {
+                prod: {
+                    options: {
+                        sourceMap: false
+                    },
+                    files: {
+                        'core/shared/ghost-url.min.js': 'core/shared/ghost-url.js'
                     }
                 }
             }
@@ -604,11 +633,16 @@ var _              = require('lodash'),
         grunt.registerTask('ensureConfig', function () {
             var config = require('./core/server/config'),
                 done = this.async();
-            config.load().then(function () {
+
+            if (!process.env.TEST_SUITE || process.env.TEST_SUITE !== 'client') {
+                config.load().then(function () {
+                    done();
+                }).catch(function (err) {
+                    grunt.fail.fatal(err.stack);
+                });
+            } else {
                 done();
-            }).catch(function (err) {
-                grunt.fail.fatal(err.stack);
-            });
+            }
         });
 
         // #### Reset Database to "New" state *(Utility Task)*
@@ -632,7 +666,7 @@ var _              = require('lodash'),
 
         grunt.registerTask('test', function (test) {
             if (!test) {
-                grunt.log.write('no test provided');
+                grunt.fail.fatal('No test provided. `grunt test` expects a filename. e.g.: `grunt test:unit/apps_spec.js`. Did you mean `npm test` or `grunt validate`?');
             }
 
             grunt.task.run('test-setup', 'shell:test:' + test);
@@ -647,7 +681,19 @@ var _              = require('lodash'),
         // manages the build of your environment and then calls `grunt test`
         //
         // `grunt validate` is called by `npm test` and is used by Travis.
-        grunt.registerTask('validate', 'Run tests and lint code',
+        grunt.registerTask('validate', 'Run tests and lint code', function () {
+            if (process.env.TEST_SUITE === 'server') {
+                grunt.task.run(['init', 'test-server']);
+            } else if (process.env.TEST_SUITE === 'client') {
+                grunt.task.run(['init', 'test-client']);
+            } else if (process.env.TEST_SUITE === 'lint') {
+                grunt.task.run(['shell:ember:init', 'shell:bower', 'lint']);
+            } else {
+                grunt.task.run(['validate-all']);
+            }
+        });
+
+        grunt.registerTask('validate-all', 'Lint code and run all tests',
             ['init', 'lint', 'test-all']);
 
         // ### Test-All
@@ -655,11 +701,17 @@ var _              = require('lodash'),
         //
         // `grunt test-all` will lint and test your pre-built local Ghost codebase.
         //
-        // `grunt test-all` runs jshint and jscs as well as all 6 test suites. See the individual sub tasks below for
+        // `grunt test-all` runs all 6 test suites. See the individual sub tasks below for
         // details of each of the test suites.
         //
-        grunt.registerTask('test-all', 'Run tests and lint code',
-            ['test-routes', 'test-module', 'test-unit', 'test-integration', 'test-ember', 'test-functional']);
+        grunt.registerTask('test-all', 'Run tests for both server and client',
+            ['test-server', 'test-client']);
+
+        grunt.registerTask('test-server', 'Run server tests',
+            ['test-routes', 'test-module', 'test-unit', 'test-integration']);
+
+        grunt.registerTask('test-client', 'Run client tests',
+            ['test-ember']);
 
         // ### Lint
         //
@@ -949,7 +1001,7 @@ var _              = require('lodash'),
         //
         // It is otherwise the same as running `grunt`, but is only used when running Ghost in the `production` env.
         grunt.registerTask('prod', 'Build JS & templates for production',
-            ['shell:ember:prod', 'master-warn']);
+            ['shell:ember:prod', 'uglify:prod', 'master-warn']);
 
         // ### Live reload
         // `grunt dev` - build assets on the fly whilst developing
@@ -976,10 +1028,25 @@ var _              = require('lodash'),
             ' - Copy files to release-folder/#/#{version} directory\n' +
             ' - Clean out unnecessary files (travis, .git*, etc)\n' +
             ' - Zip files in release-folder to dist-folder/#{version} directory',
-            ['init', 'shell:ember:prod', 'clean:release',  'shell:shrinkwrap', 'copy:release', 'compress:release']);
+            function () {
+                grunt.config.set('copy.release', {
+                    expand: true,
+                    // #### Build File Patterns
+                    // A list of files and patterns to include when creating a release zip.
+                    // This is read from the `.npmignore` file and all patterns are inverted as the `.npmignore`
+                    // file defines what to ignore, whereas we want to define what to include.
+                    src: fs.readFileSync('.npmignore', 'utf8').split('\n').filter(Boolean).map(function (pattern) {
+                        return pattern[0] === '!' ? pattern.substr(1) : '!' + pattern;
+                    }),
+                    dest: '<%= paths.releaseBuild %>/'
+                });
+
+                grunt.task.run(['init', 'prod', 'clean:release',  'shell:dedupe', 'shell:shrinkwrap', 'copy:release', 'compress:release']);
+            }
+        );
 
         grunt.registerTask('release-full', 'Create zip package with all needed node modules.',
-           ['init', 'shell:ember:prod', 'clean:release', 'shell:shrinkwrap', 'copy:release', 'compress:release', 'shell:sqlite-bindings', 'copy:full', 'compress:release-full']);
+            ['release', 'shell:sqlite-bindings', 'copy:full', 'compress:release-full']);
     };
 
 module.exports = configureGrunt;

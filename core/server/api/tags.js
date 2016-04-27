@@ -8,7 +8,7 @@ var Promise      = require('bluebird'),
     pipeline     = require('../utils/pipeline'),
 
     docName      = 'tags',
-    allowedIncludes = ['post_count'],
+    allowedIncludes = ['count.posts'],
     tags;
 
 /**
@@ -80,7 +80,7 @@ tags = {
                 return {tags: [result.toJSON(options)]};
             }
 
-            return Promise.reject(new errors.NotFoundError('Tag not found.'));
+            return Promise.reject(new errors.NotFoundError('未找到标签。'));
         });
     },
 
@@ -154,7 +154,7 @@ tags = {
                 return {tags: [tag]};
             }
 
-            return Promise.reject(new errors.NotFoundError('Tag not found.'));
+            return Promise.reject(new errors.NotFoundError('未找到标签。'));
         });
     },
 
